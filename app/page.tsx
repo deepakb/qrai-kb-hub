@@ -1,3 +1,12 @@
-export default function Chat() {
-  return <main>Hello, world!</main>;
+import { redirect } from "next/navigation";
+import { auth } from "@/app/(auth)/auth";
+
+export default async function Home() {
+  const session = await auth();
+
+  if (session) {
+    redirect("/chat");
+  } else {
+    redirect("/login");
+  }
 }
